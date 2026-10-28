@@ -1,0 +1,26 @@
+ComfyUI 0.37 / frontend 1.53.6 compatibility patch v12
+
+- Fresh R2V nodes start with exactly four reference sockets.
+- Dynamic sockets remain grouped as Images, Video/Video Audio pairs, then Audios.
+- Existing LLink identities and reroute parentage survive dynamic slot reordering.
+- Expensive UI-only detach/restore mutations during configure and serialize are batched.
+- Normal concrete-widget creation remains enabled.
+- Disclosure clicks no longer re-register the complete 100+ widget array.
+- Static locale/option metadata is refreshed only when the locale changes.
+- Large UI-only widget families are registered in concrete-safe phases.
+- Batched registration uses separate before/working arrays and commits exactly once.
+- Batched registration also detects an inherited frontend widgets accessor.
+- Unchanged hidden/Y/widget metadata is no longer written on every UI sync.
+- Main count mirrors and R2V layout rows no longer leave and re-enter the widget array on every click.
+- UI-only widgets use stable internal names; translated text is label-only.
+- Every extension capsule (scene, weather/environment, appearance, clothing, and reference options) now uses the same grouped-section inset for both drawing and pointer hit-testing.
+- Extension option widgets are created only for the currently active people and progress turns, then added lazily as counts grow.
+- Sequential-vocal detail controls are created only when Continue Speaking is enabled; inactive turns no longer register dozens of hidden canvas widgets at workflow load.
+- Lazy UI additions are committed as one batched widget-order update on frontend 1.53.6.
+- R2V: scene_prompt no longer grows on workflow switch. Scene-height preservation runs only when the layout actually changed (same contract as Main), and DOM textarea heights are ignored until the loaded graph view has settled.
+- Workflow switch: loadedGraphNode commits the widget array once per H3 node (was 4 full re-registrations per node on frontend 1.53).
+- Menu clicks: group headers no longer replace their options object on every refresh (tooltip getter from the connected-STRING bridge always read "" and forced 24-48 options replacements per click).
+- Menu clicks: the whole visibility transaction (syncDynamicUI / R2V syncCoreVisibility) is one widget batch, so lazy row materialization re-registers the widget array at most once per interaction and live `widgets` accessor reads drop from ~1000 to under 70 per click.
+- Backend fix (Main + R2V): on-screen composite speakers (A+B, A+C, B+C, A+B+C) followed by another speaker no longer raise "Speaker IDs must be introduced by first vocal-event order". The prompt was correct; the internal validator did not recognise the "say together in two|three clearly distinct voices ... clearly audible," marker.
+- Backend fix (R2V): with an empty scene_prompt (reference-only or people-free scaffold), Korean sound_hint / music_hint are translated again when scene_translate is ko_to_en. The scaffold no longer forces scene_translate=off; only its own "already non-Korean" notice is dropped.
+- Backend fix (Main + R2V): a Timeline action ending in ! or ? no longer gets an extra period ("jumps!.").

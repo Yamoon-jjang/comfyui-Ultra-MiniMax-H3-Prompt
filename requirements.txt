@@ -1,0 +1,3 @@
+# No additional Python packages are required for translation.
+# If deep-translator is already installed, the node may use it only as a final
+# compatibility fallback after the built-in Google/MyMemory routes.
