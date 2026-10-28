@@ -1,0 +1,8 @@
+# Keep large, optional demonstration archives on GitHub instead of bundling them in the Registry package.
+예제/
+
+# CI and development-only files are not needed in the installed custom node.
+.github/
+__pycache__/
+*.pyc
+*.pyo
