@@ -1,0 +1,16 @@
+[project]
+name = "ultra-minimax-h3-prompt"
+version = "3.59.0"
+description = "Structured MiniMax H3 video prompt compiler: Main and R2V nodes with scenes, characters, camera, timelines, dialogue, sound, and Korean-to-English translation."
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt"
+"Bug Tracker" = "https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt/issues"
+
+[tool.comfy]
+PublisherId = "yamoon-jjang"
+DisplayName = "Ultra MiniMax H3 Prompt"
+includes = []
