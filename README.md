@@ -6,6 +6,32 @@
 
 > **두 개의 독립적인 프롬프트 노드를 제공합니다.** `UltraMiniMaxH3Prompt`(Main)와 `UltraMiniMaxH3PromptR2V`(R2V)를 각각 사용하거나 함께 배치할 수 있습니다. **아래 올인원 워크플로는 개발자의 개인적인 구성 예시일 뿐이며, 필수 구성이나 유일하게 권장되는 방식이 아닙니다.** 사용자는 두 노드를 원하는 모델·샘플러·이미지 처리·영상 출력 노드와 자유롭게 연결해 자기 목적에 맞는 워크플로를 만들 수 있습니다.
 
+## 📦 설치
+
+**ComfyUI Manager (권장)**
+
+ComfyUI의 **Manager → Custom Nodes Manager**에서 **`Ultra MiniMax H3 Prompt`** 를 검색하여 설치합니다. Registry 상태에 따라 최신 안정 버전 대신 `nightly` 옵션만 제공되거나 특정 버전의 설치가 제한될 수 있습니다.
+
+**수동 설치**
+
+터미널에서 ComfyUI의 `custom_nodes` 폴더로 이동한 다음 저장소를 복제합니다.
+
+```bash
+cd ComfyUI/custom_nodes
+git clone https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt.git
+```
+
+설치 후 **ComfyUI를 완전히 재시작**하고 브라우저를 **Ctrl+F5**로 새로고침하세요. 노드 검색창에서 **`Ultra MiniMax H3 Prompt` (Main)** 및 **`Ultra MiniMax H3 Prompt R2V`** 를 찾을 수 있습니다.
+
+- ✅ **별도 필수 pip 패키지 없음** — `requirements.txt` 기준 추가 설치는 필요하지 않습니다.
+- ✅ **한국어 설명 입력 지원** — 온라인 자동 번역을 활용할 수 있으며 Google Cloud Translation API 키는 선택사항입니다.
+- ✅ **한국어 상세 안내 포함** — [`메뉴얼.txt`](./메뉴얼.txt) 및 [`구글 번역 API 사용법.txt`](./구글%20번역%20API%20사용법.txt)
+- ✅ **올인원 예제 포함** — [`MiniMax_H3_All_In_One.json`](./MiniMax_H3_All_In_One.json)
+
+> **참고:** Main/R2V 프롬프트 노드만 사용한다면 올인원 예제에 포함된 업스케일·보간·추가 도구 노드는 필요하지 않습니다. 올인원 예제 전체를 실행하려면 해당 외부 노드와 모델을 별도로 준비해야 합니다.
+
+---
+
 ## 주요 기능
 
 | 구분 | 내용 |
@@ -19,15 +45,6 @@
 | **검증과 안내** | 입력·모드·참조 조건을 검사하고 상태 또는 경고를 표시하는 프롬프트 컴파일 흐름 |
 
 프롬프트의 규칙 기반 생성·검증 기능이며, **LLM/VLM을 실행하거나 입력 이미지의 픽셀 내용을 직접 분석하지는 않습니다.** 최종 영상의 내용 및 품질은 사용한 H3 모델, 참조 자료, 샘플링 설정에 따라 달라집니다.
-
-## 설치
-
-1. 이 저장소의 배포 폴더 `comfyui-Ultra-MiniMax-H3-Prompt`를 `ComfyUI/custom_nodes/` 아래에 배치합니다.
-2. ComfyUI를 완전히 재시작하고 웹 페이지를 새로고침합니다.
-3. 노드 검색창에서 `UltraMiniMaxH3Prompt`(Main)와 `UltraMiniMaxH3PromptR2V`(R2V)에 해당하는 프롬프트 노드를 찾아 연결합니다.
-4. 자세한 한국어 설정과 번역 API 사용법은 같은 폴더의 [`메뉴얼.txt`](./메뉴얼.txt), [`구글 번역 API 사용법.txt`](./구글%20번역%20API%20사용법.txt)를 확인합니다.
-
-**번역에 별도 Python 패키지는 필수가 아닙니다.** 한국어 설명을 온라인으로 자동 번역하려면 네트워크 접근이 필요하며, 공식 Google Cloud Translation API 키는 선택사항입니다. 공식 API 사용 시 Google의 사용량·과금 정책을 확인해야 합니다.
 
 ## 올인원 워크플로 예제 (선택사항)
 
