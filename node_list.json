@@ -1,0 +1,4 @@
+{
+  "UltraMiniMaxH3Prompt": "Main H3 video prompt compiler for T2VA/I2VA/L2VA/FL2VA: scene, characters, timeline, cameras, dialogue, music and Korean translation.",
+  "UltraMiniMaxH3PromptR2V": "R2V/Ref2VA H3 prompt compiler with image, video and audio reference roles, timeline, speakers and structured output."
+}
