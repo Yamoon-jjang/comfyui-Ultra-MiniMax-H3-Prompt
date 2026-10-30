@@ -1,4 +1,5 @@
 import { api } from "../../scripts/api.js";
+import { h3FetchApi } from "./ultra_h3_security.js";
 
 export const TRANSLATION_API_WIDGET_MARKER = Symbol.for("ultraH3.translationApiWidget");
 
@@ -97,7 +98,7 @@ export function translationApiWidget(node) {
 }
 
 async function requestJson(path, options = {}) {
-  const response = await api.fetchApi(path, options);
+  const response = await h3FetchApi(path, options);
   let payload = null;
   try { payload = await response.json(); } catch (_) {}
   if (!response.ok || !payload?.ok) {

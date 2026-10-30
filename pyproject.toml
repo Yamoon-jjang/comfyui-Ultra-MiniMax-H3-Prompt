@@ -1,6 +1,6 @@
 [project]
 name = "ultra-minimax-h3-prompt"
-version = "3.59.0"
+version = "3.59.1"
 description = "Structured MiniMax H3 video prompt compiler: Main and R2V nodes with scenes, characters, camera, timelines, dialogue, sound, and Korean-to-English translation."
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
