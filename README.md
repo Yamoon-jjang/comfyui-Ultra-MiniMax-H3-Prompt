@@ -10,6 +10,8 @@
 
 *Ultra MiniMax H3 Prompt — Main / R2V 노드 화면과 타임라인·카메라·인물·대사·음향 설정. / Main and R2V prompt nodes for ComfyUI MiniMax H3 video workflows.*
 
+**[📦 GitHub Release v3.59.1 다운로드 / Download ZIP](https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt/releases/latest)**
+
 > **두 개의 독립적인 프롬프트 노드를 제공합니다.** `UltraMiniMaxH3Prompt`(Main)와 `UltraMiniMaxH3PromptR2V`(R2V)를 각각 사용하거나 함께 배치할 수 있습니다. **아래 올인원 워크플로는 개발자의 개인적인 구성 예시일 뿐이며, 필수 구성이나 유일하게 권장되는 방식이 아닙니다.** 사용자는 두 노드를 원하는 모델·샘플러·이미지 처리·영상 출력 노드와 자유롭게 연결해 자기 목적에 맞는 워크플로를 만들 수 있습니다.
 
 ## 📦 설치
@@ -72,9 +74,9 @@ git clone https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt.git
 
 ## 버전 및 배포 안내
 
-- 제공 ZIP 파일명: **V3.59** — 기존 V3.59 소스에 이 워크플로 예제와 GitHub 안내를 추가한 문서·예제 구성입니다.
+- **GitHub Release: [v3.59.1](https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt/releases/tag/v3.59.1)** — 현재 `pyproject.toml`의 패키지 버전을 기준으로, Main/R2V 코드·예제 워크플로·문서·프로그램 화면 이미지를 담은 설치용 ZIP을 제공합니다. 이전 문서의 V3.59는 기존 배포 계열 표기입니다.
 - 노드 내부의 기능 버전 문자열은 이전 배포 계열의 **3.50**으로 남아 있으며, 이 문서 추가만으로 백엔드·프런트엔드 기능이 변경되거나 최신 ComfyUI에서의 모든 UI 동작이 검증된 것은 아닙니다.
-- 이 구성은 별도의 **v3.90 릴리스**가 아닙니다. GitHub Releases 사용 여부는 저장소 공개·관리 정책에 따라 선택할 수 있습니다.
+- 이 배포본은 **v3.90 릴리스가 아닙니다.** 첫 GitHub Release는 **v3.59.1**이며, README 이미지 및 배포 작업 추가만으로 노드의 실행 기능이 변경되지는 않았습니다.
 - 사용·수정·재배포 조건은 [`LICENSE`](./LICENSE)를 확인하십시오.
 
 ---
