@@ -4,6 +4,12 @@
 
 장면을 영어로 처음부터 직접 설계할 필요 없이 필요한 항목을 선택하고 작성하면, H3 형식에 맞는 **구조화된 영상 프롬프트**를 생성합니다. 이 노드는 영상 모델을 대체하지 않는 *프롬프트 생성기*이며, 실제 영상 렌더링에는 ComfyUI의 MiniMax H3 모델과 별도의 생성 워크플로가 필요합니다.
 
+### 🖼️ 프로그램 화면 / Application preview
+
+![Ultra MiniMax H3 Prompt — Main and R2V node interface, timeline, camera, characters, dialogue and sound](./Ultra-MiniMax-H3-Prompt-showcase.webp)
+
+*Ultra MiniMax H3 Prompt — Main / R2V 노드 화면과 타임라인·카메라·인물·대사·음향 설정. / Main and R2V prompt nodes for ComfyUI MiniMax H3 video workflows.*
+
 > **두 개의 독립적인 프롬프트 노드를 제공합니다.** `UltraMiniMaxH3Prompt`(Main)와 `UltraMiniMaxH3PromptR2V`(R2V)를 각각 사용하거나 함께 배치할 수 있습니다. **아래 올인원 워크플로는 개발자의 개인적인 구성 예시일 뿐이며, 필수 구성이나 유일하게 권장되는 방식이 아닙니다.** 사용자는 두 노드를 원하는 모델·샘플러·이미지 처리·영상 출력 노드와 자유롭게 연결해 자기 목적에 맞는 워크플로를 만들 수 있습니다.
 
 ## 📦 설치
