@@ -1,0 +1,119 @@
+name: Publish GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - pyproject.toml
+      - .github/workflows/github_release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Package and publish a versioned ZIP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify package version
+        id: metadata
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+          from pathlib import Path
+          with Path("pyproject.toml").open("rb") as handle:
+              version = tomllib.load(handle)["project"]["version"]
+          if not version or not all(part.isdigit() for part in version.split(".")):
+              raise SystemExit("Unexpected pyproject.toml version: " + repr(version))
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"tag=v{version}\n")
+              out.write(f"filename=comfyui-Ultra-MiniMax-H3-Prompt_v{version}.zip\n")
+          PY
+
+      - name: Build and verify installable ZIP
+        shell: bash
+        run: |
+          python - <<'PY'
+          import subprocess
+          import tomllib
+          import zipfile
+          from pathlib import Path
+          with open("pyproject.toml", "rb") as f:
+              version = tomllib.load(f)["project"]["version"]
+          archive = Path(f"comfyui-Ultra-MiniMax-H3-Prompt_v{version}.zip")
+          prefix = "comfyui-Ultra-MiniMax-H3-Prompt"
+          tracked = subprocess.check_output(["git", "ls-files", "-z"]).split(b"\0")
+          entries = []
+          with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED, compresslevel=8) as z:
+              for raw in tracked:
+                  if not raw:
+                      continue
+                  path = Path(raw.decode("utf-8", "surrogateescape"))
+                  if not path.is_file() or path.is_symlink():
+                      continue
+                  if ".github" in path.parts or "__pycache__" in path.parts or path.suffix in {".pyc", ".pyo"}:
+                      continue
+                  dest = f"{prefix}/{path.as_posix()}"
+                  z.write(path, arcname=dest)
+                  entries.append(dest)
+          with zipfile.ZipFile(archive) as z:
+              broken = z.testzip()
+              if broken:
+                  raise RuntimeError(f"ZIP integrity check failed at {broken}")
+              required = {
+                  f"{prefix}/__init__.py",
+                  f"{prefix}/ultra_minimax_h3_prompt.py",
+                  f"{prefix}/ultra_minimax_h3_r2v.py",
+                  f"{prefix}/pyproject.toml",
+                  f"{prefix}/README.md",
+                  f"{prefix}/Ultra-MiniMax-H3-Prompt-showcase.webp",
+                  f"{prefix}/MiniMax_H3_All_In_One.json",
+                  f"{prefix}/메뉴얼.txt",
+              }
+              missing = required - set(z.namelist())
+              if missing:
+                  raise RuntimeError(f"Missing release files: {sorted(missing)}")
+          print(f"Verified: {archive}, {len(entries)} tracked files")
+          PY
+
+      - name: Publish GitHub Release if missing
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.metadata.outputs.tag }}
+          RELEASE_FILE: ${{ steps.metadata.outputs.filename }}
+        run: |
+          if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "Release $RELEASE_TAG already exists; not overwriting."
+            exit 0
+          fi
+          cat > release-notes.md <<'NOTES'
+          ## Ultra MiniMax H3 Prompt / ComfyUI
+
+          MiniMax H3 영상 프롬프트를 구성하는 **Main + R2V** 커스텀 노드의 GitHub 첫 배포입니다.
+
+          - Main: T2V / I2V 및 시작·끝 이미지 기반 프롬프트
+          - R2V: 이미지·영상·오디오 레퍼런스 기반 프롬프트
+          - 카메라, 인물, 타임라인, 대사, 효과음 및 음악 설정
+          - 한국어→영어 번역 기능과 원문 대사 보존
+          - 예제 워크플로, 한글 메뉴얼, Main/R2V 화면 소개 이미지 포함
+
+          **설치:** ZIP을 풀어 `comfyui-Ultra-MiniMax-H3-Prompt` 폴더를 ComfyUI의 `custom_nodes`에 넣고 재시작하세요. 이미 동일 노드가 설치돼 있다면 중복 설치하지 마세요.
+
+          **주의:** 본 패키지는 **영상 프롬프트 생성 노드**입니다. 영상 생성 모델과 렌더링 워크플로 자체는 포함하지 않습니다. 올인원 예제에 사용된 외부 노드·모델은 별도로 필요할 수 있습니다. 실행 코드의 내부 기능 버전 문자열은 3.50 계열로 남아 있으며, 패키지 버전은 `pyproject.toml` 기준입니다.
+
+          ---
+          **English:** First GitHub Release of the Ultra MiniMax H3 Prompt custom nodes for ComfyUI. Includes Main and R2V prompt generation, scene/timeline/camera/character/dialogue/sound controls, Korean-to-English translation, documentation and an optional example workflow. This is a prompt compiler, not a standalone video rendering model.
+          NOTES
+          gh release create "$RELEASE_TAG" "$RELEASE_FILE" \
+            --target "$GITHUB_SHA" \
+            --title "Ultra MiniMax H3 Prompt $RELEASE_TAG" \
+            --notes-file release-notes.md \
+            --latest
