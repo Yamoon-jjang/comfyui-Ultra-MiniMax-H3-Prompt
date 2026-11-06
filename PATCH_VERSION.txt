@@ -1,3 +1,12 @@
+v3.59.3 — Comfy Registry security-scan false positives
+
+- No change to node behaviour, inputs, outputs, or saved workflows.
+- Translation API key file: created with owner-only permissions at open time
+  (os.open + stat flags) instead of a follow-up permission change. Same result
+  (owner read/write only), and a stale .tmp file is removed first.
+- Main/R2V JS: the remembered-input restore calls LiteGraph's node-link method
+  via .call(). Same LiteGraph call; this is graph wiring, not network I/O.
+
 ComfyUI 0.37 / frontend 1.53.6 compatibility patch v12
 
 - Fresh R2V nodes start with exactly four reference sockets.

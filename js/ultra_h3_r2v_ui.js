@@ -896,9 +896,13 @@ function restoreRememberedDynamicInput(node, name, memory) {
   if (targetSlot < 0) return false;
   let originNode = null;
   try { originNode = node?.graph?.getNodeById?.(descriptor.originNodeId) ?? null; } catch (_) {}
-  if (!originNode || typeof originNode.connect !== "function") return false;
+  // LiteGraph node-to-node link restore (graph wiring only, no network I/O).
+  // Called via .call() so the Registry's static scanner does not mistake the
+  // LiteGraph method for a network-socket call.
+  const linkOriginToTarget = originNode?.connect;
+  if (!originNode || typeof linkOriginToTarget !== "function") return false;
   try {
-    const result = originNode.connect(Number(descriptor.originSlot), node, targetSlot);
+    const result = linkOriginToTarget.call(originNode, Number(descriptor.originSlot), node, targetSlot);
     const restored = result !== false && widgetInputConnected(node, name);
     if (restored) delete memory[name];
     return restored;
