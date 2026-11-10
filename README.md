@@ -77,7 +77,7 @@ git clone https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt.git
 - **GitHub Release: [v3.59.3](https://github.com/Yamoon-jjang/comfyui-Ultra-MiniMax-H3-Prompt/releases/tag/v3.59.3)** — 현재 `pyproject.toml`의 패키지 버전을 기준으로, Main/R2V 코드·예제 워크플로·문서·프로그램 화면 이미지를 담은 설치용 ZIP을 제공합니다. 이전 문서의 V3.59는 기존 배포 계열 표기입니다.
 - 노드 내부의 기능 버전 문자열은 이전 배포 계열의 **3.50**으로 남아 있으며, 이 문서 추가만으로 백엔드·프런트엔드 기능이 변경되거나 최신 ComfyUI에서의 모든 UI 동작이 검증된 것은 아닙니다.
 - 이 배포본은 **v3.90 릴리스가 아닙니다.** 첫 GitHub Release는 **v3.59.1**이며, README 이미지 및 배포 작업 추가만으로 노드의 실행 기능이 변경되지는 않았습니다.
-- 사용·수정·재배포 조건은 [`LICENSE`](./LICENSE)를 확인하십시오.
+- 사용·수정·재배포 조건은 [`LICENSE`](./LICENSE)와 아래 [라이선스 / License](#-라이선스--license) 항목을 확인하십시오. / See `LICENSE` and the License section below for usage terms.
 
 ---
 
@@ -441,9 +441,25 @@ The examples use the exact visible control notation where practical. For every m
 Reference- and image-based examples are written from the actual visible starting composition. `Overall Scene / Background` describes the static opening stage and spatial layout, while timed actions belong to Progress rows. If the target object is far away, the action must include the required travel; when that travel is unrealistic within a 15-second clip, the example uses an action that can be performed from the visible starting position instead. This prevents prompts such as instantly touching a distant lake from a hilltop and helps H3 preserve the intended visible action sequence.
 
 
-## License
+## 📄 라이선스 / License
 
-This distribution uses the restricted bilingual terms in `LICENSE`. Modification, derivative distribution, redistribution, republishing, sharing, sale, or transfer without prior written permission from the copyright holder is prohibited.
+**한국어**
+
+이 배포본은 [`LICENSE`](./LICENSE)의 **제한적 사용 라이선스**(한글·영문)를 따릅니다. 오픈소스 라이선스가 아닙니다.
+정당하게 받은 사본은 개인적 또는 내부적 용도로 사용할 수 있지만, 저작권자의 사전 서면 허가 없이 수정 · 파생 버전 제작 · 재배포 · 재게시 · 공유 · 판매 · 양도할 수 없습니다.
+
+- 저작권 · 라이선스 · 버전 표시를 삭제하거나 변경할 수 없습니다.
+- MiniMax H3 모델과 ComfyUI 등 외부 프로그램은 각자의 라이선스를 따릅니다.
+- 이 프로그램은 있는 그대로 제공되며, 사용으로 생긴 문제에 대해 제작자는 책임지지 않습니다.
+
+**English**
+
+This distribution uses the **restricted-use license** in [`LICENSE`](./LICENSE) (Korean and English). It is not an open-source license.
+An authorized copy may be used for your own personal or internal use, but modification, derivative versions, redistribution, republishing, sharing, sale or transfer without prior written permission from the copyright holder is prohibited.
+
+- Copyright, license and version notices may not be removed or altered.
+- The MiniMax H3 model, ComfyUI and other external software remain under their own licenses.
+- Provided "as is", without warranty of any kind; the author is not liable for any problems arising from its use.
 
 
 ## Video-environment timeline options
